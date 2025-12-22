@@ -103,7 +103,12 @@ public partial class Form1 : Form
         else
         {
             // 修改操作
-            int id = int.Parse(customerid);
+            if (!int.TryParse(customerid, out int id))
+            {
+                lbl_Note.Text = "操作结果：无效的客户编号！";
+                lbl_Note.ForeColor = Color.Red;
+                return;
+            }
             var customer = customerList.FirstOrDefault(c => c.CustomerID == id);
             if (customer != null)
             {
@@ -144,7 +149,12 @@ public partial class Form1 : Form
         if (result == DialogResult.Yes)
         {
             // 3、执行删除操作
-            int id = int.Parse(customerid);
+            if (!int.TryParse(customerid, out int id))
+            {
+                lbl_Note.Text = "操作结果：无效的客户编号！";
+                lbl_Note.ForeColor = Color.Red;
+                return;
+            }
             var customer = customerList.FirstOrDefault(c => c.CustomerID == id);
             if (customer != null)
             {
